@@ -1,0 +1,13 @@
+{
+	"n_targets": 35862,
+	"n_bootstraps": 30,
+	"n_processed": 33383015,
+	"n_pseudoaligned": 30796231,
+	"n_unique": 14905165,
+	"p_pseudoaligned": 92.3,
+	"p_unique": 44.6,
+	"kallisto_version": "0.46.1",
+	"index_version": 10,
+	"start_time": "Thu Jul 14 11:50:34 2022",
+	"call": "kallisto quant -i caenorhabditis_elegans/transcriptome.idx --bootstrap-samples=30 -t 6 -o /mnt/e/RNAseq/kallisto/F3 F3_R1_trimmed.fq.gz F3_R2_trimmed.fq.gz"
+}
