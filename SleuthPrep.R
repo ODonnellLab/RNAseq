@@ -33,6 +33,7 @@ so <- sleuth_fit(so, ~food + group, 'full')
 so <- sleuth_fit(so, ~food, 'reduced') #LRT only useful for nested models
 so <- sleuth_fit(so, ~food + genotype, 'gt')
 so <- sleuth_fit(so, ~food + genotype + additive, 'max')
+so <- sleuth_fit(so, ~food + additive, 'additive')
 so <- sleuth_lrt(so, 'reduced', 'full')
 so <- sleuth_lrt(so, 'reduced', 'gt')
 so <- sleuth_lrt(so, 'gt', 'max')
@@ -55,6 +56,13 @@ so <- sleuth_wt(so, 'additive5HT', which_model = 'max')
 so <- sleuth_wt(so, 'genotypecest-1.2', which_model = 'gt')
 so <- sleuth_wt(so, 'genotypecest-2.1', which_model = 'gt')
 so <- sleuth_wt(so, 'genotypecest-4', which_model = 'gt')
+
+so <- sleuth_wt(so, 'additiveTA', which_model = 'additive')
+so <- sleuth_wt(so, 'additiveBW', which_model = 'additive')
+so <- sleuth_wt(so, 'additiveOA', which_model = 'additive')
+so <- sleuth_wt(so, 'additive5HT', which_model = 'additive')
+
+so <- sleuth_wt(so, 'groupN2.TA:groupcest-1.2.TA', which_model = 'full')
 
 sleuth_cest1.2sig <- dplyr::filter(sleuth_cest1.2table, qval <= 0.05)
 

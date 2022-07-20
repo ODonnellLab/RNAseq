@@ -1,0 +1,13 @@
+{
+	"n_targets": 35862,
+	"n_bootstraps": 30,
+	"n_processed": 48970558,
+	"n_pseudoaligned": 12154291,
+	"n_unique": 7444191,
+	"p_pseudoaligned": 24.8,
+	"p_unique": 15.2,
+	"kallisto_version": "0.46.1",
+	"index_version": 10,
+	"start_time": "Mon Jul 18 17:34:54 2022",
+	"call": "kallisto quant -i /mnt/g/Shared drives/O'Donnell lab/LargeDatasets/RNAseq/caenorhabditis_elegans/transcriptome.idx --bootstrap-samples=30 -t 6 -o kallisto/P3 P3_R1_trimmed.fq.gz P3_R2_trimmed.fq.gz"
+}
