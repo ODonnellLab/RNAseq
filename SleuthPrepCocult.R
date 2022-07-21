@@ -60,3 +60,24 @@ sleuth_cest4table <- sleuth_results(soCo, 'genotypecest-4', 'wt', show_all = FAL
 sleuth_cest4sig <- dplyr::filter(sleuth_cest4table, qval <= 0.05)
 
 sleuth_live(soCo)
+
+meta_noQ1 <- filter(metadata, sample != "Q1")
+
+soCo_noD3 <- sleuth_prep(meta_noQ1,
+                                 target_mapping = ttg,
+                                 aggregation_column = 'ext_gene',
+                                 extra_bootstrap_summary = TRUE,
+                                 read_bootstrap_tpm  = TRUE,
+                                 num_cores = 4,
+                                 gene_mode = TRUE)
+
+soCo_noD3 <- sleuth_fit(soCo_noD3, ~food, 'full')
+soCo_noD3 <- sleuth_fit(soCo_noD3, ~1, 'reduced') #LRT only useful for nested models
+
+soCo_noD3 <- sleuth_lrt(soCo_noD3, 'reduced', 'full')
+
+soCo_noD3 <- sleuth_wt(soCo_noD3, 'foodJUb39', which_model = 'full')
+soCo_noD3 <- sleuth_wt(soCo_noD3, 'foodMOYb033', which_model = 'full')
+soCo_noD3 <- sleuth_wt(soCo_noD3, 'foodOP50', which_model = 'full')
+
+sleuth_live(soCo_noD3)
