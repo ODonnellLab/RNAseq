@@ -70,6 +70,14 @@ soCo_noD3 <- sleuth_prep(meta_noQ1,
                                  read_bootstrap_tpm  = TRUE,
                                  num_cores = 4,
                                  gene_mode = TRUE)
+soCo_noD3tmode_noAgg <- sleuth_prep(meta_noQ1,
+                         target_mapping = ttg,
+                         #aggregation_column = 'ext_gene',
+                         extra_bootstrap_summary = TRUE,
+                         read_bootstrap_tpm  = TRUE,
+                         num_cores = 4,
+                         gene_mode = FALSE)
+
 
 soCo_noD3 <- sleuth_fit(soCo_noD3, ~food, 'full')
 soCo_noD3 <- sleuth_fit(soCo_noD3, ~1, 'reduced') #LRT only useful for nested models
@@ -80,4 +88,24 @@ soCo_noD3 <- sleuth_wt(soCo_noD3, 'foodJUb39', which_model = 'full')
 soCo_noD3 <- sleuth_wt(soCo_noD3, 'foodMOYb033', which_model = 'full')
 soCo_noD3 <- sleuth_wt(soCo_noD3, 'foodOP50', which_model = 'full')
 
+
+soCo_noD3tmode <- sleuth_fit(soCo_noD3tmode, ~food, 'full')
+
+soCo_noD3tmode <- sleuth_wt(soCo_noD3tmode, 'foodJUb39', which_model = 'full')
+soCo_noD3tmode <- sleuth_wt(soCo_noD3tmode, 'foodMOYb033', which_model = 'full')
+soCo_noD3tmode <- sleuth_wt(soCo_noD3tmode, 'foodOP50', which_model = 'full')
+
+
 sleuth_live(soCo_noD3)
+
+
+# select smallest fold change and smallest sem
+# 
+JUbnochange <- JUb %>% arrange(abs(b)) %>% head(n=1000) %>% arrange(se_b)
+MOYbnochange <- MOyb %>% arrange(abs(b)) %>% head(n=1000) %>% arrange(se_b)
+Cocultnochange <- Cocult %>% arrange(abs(b)) %>% head(n=1000) %>% arrange(se_b)
+
+full_join(JUbnochange, MOYbnochange)
+  
+  
+  

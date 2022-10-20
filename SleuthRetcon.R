@@ -27,6 +27,14 @@ soBWGT <- sleuth_prep(filter(metadata, food == "tnaA"),
                      num_cores = 4,
                      gene_mode = TRUE)
 
+soBWGT_tx <- sleuth_prep(filter(metadata, food == "tnaA"),
+                      target_mapping = ttg,
+                      aggregation_column = 'ext_gene',
+                      extra_bootstrap_summary = TRUE,
+                      read_bootstrap_tpm  = TRUE,
+                      num_cores = 4,
+                      gene_mode = FALSE)
+
 soOPGT <- sleuth_prep(filter(metadata, food == "OP50"),
                       target_mapping = ttg,
                       aggregation_column = 'ext_gene',
@@ -41,6 +49,7 @@ soOPGT <- sleuth_prep(filter(metadata, food == "OP50"),
 soBWGT <- sleuth_fit(soBWGT, ~ 1, 'reduced') #LRT only useful for nested models
 soBWGT <- sleuth_fit(soBWGT, ~ genotype, 'gt')
 soBWGT <- sleuth_lrt(soBWGT, 'reduced', 'gt')
+soBWGT_tx <- sleuth_fit(soBWGT, ~ genotype, 'gt')
 #####
 models(soBWGT)
 
